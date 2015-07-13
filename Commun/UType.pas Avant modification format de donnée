@@ -1,0 +1,83 @@
+{   Copyright 2008 Jerome
+
+    This file is part of Jedicut's plugins
+
+    Jedicut's plugins are free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Jedicut's plugins are distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CncNet98.  If not, see <http://www.gnu.org/licenses/>.
+
+    The software Jedicut is allowed to statically and dynamically link this library.
+}
+
+unit UType;
+
+interface
+
+{ Caractéristique d'un matériaux }
+type
+  PMateriau = ^TMateriau;
+  TMateriau = record
+    nom : string;
+    vitesse1 : double;
+    pourcentage1 : double;
+    vitesse2 : double;
+    pourcentage2 : double;
+  end;
+
+{ Type d'identification d'un bit du port parallèle }
+{ - 0 : registre de données
+  - 1 : registre de statut /!\ LECTURE SEULE /!\
+  - 2 : registre de commande }
+type
+  TBitPort = record
+    adresseBase, iRegistre, iBit : integer;
+  end;
+
+{ Caractéristique de la communication }
+type
+  TParametreCommunication = record
+    BitModeChauffe, BitHorlogeExterne, BitEmissionChauffe, BitReceptionChauffe, BitAlimMoteur : TBitPort;
+    synchroniserMoteurAvecTimerExterne : boolean; // true si un timer externe est utilisé pour gérer le mouvement des moteurs
+  end;
+
+{ Caractéristique de la chauffe }
+type
+  TParametreChauffe = record
+    chauffeActive, chauffeMode, chauffeDynamique : boolean;
+    chauffeUtilisateur : boolean; // parametre utile lors du pilotage manuel de la machine pour activer/désactiver la chauffe
+  end;
+
+
+{ Informations nécessaires pour UNE rotation moteur }
+type
+  TOrdreMoteur = record
+    bitRotation : Byte; // Bit de rotation moteur
+    bitSens : Byte;     // Bit de sens moteur
+    vitesse : integer;  // Durées d'impulsion (vitesse)
+    chauffe : double;   // Pourcentage de chauffe
+    keyPoint : boolean;
+  end;
+
+{ Tableau d'ordres moteurs }
+type
+  TArrayOrdresMoteur = record
+    ArrayOrdres : array of TOrdreMoteur;
+  end;
+
+const NO_ERROR = 0;
+const ERROR_TIME_OUT = -1;
+const ERROR_ON_SENDING = -2;
+
+implementation
+
+
+end.
