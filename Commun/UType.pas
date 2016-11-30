@@ -80,7 +80,8 @@ type
   end;
 
 { Définition des constantes communes aux dll }
-const DLL_FAMILY_COM = 0;
+const DLL_FAMILY_COM = 0; // Jedicut calculate and send steps
+const DLL_FAMILY_COM_SEGMENT = 7; // Jedicut calculate segment (cutting wizard needed). Another software have to interpolate this
 const DLL_FAMILY_FILE_PROFIL = 1;
 const DLL_FAMILY_FILE_PROFIL_READ_ONLY = 2;
 const DLL_FAMILY_FILE_PROFIL_WRITE_ONLY = 3;

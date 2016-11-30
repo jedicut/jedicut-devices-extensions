@@ -101,7 +101,7 @@ var
   stepOk : boolean;
 begin
   Date := Now;
-  AssignFile(Fichier, 'E:\MachineVirtuelle.txt');
+  AssignFile(Fichier, 'C:\MachineVirtuelle.txt');
   try
     Append(Fichier); // On écrit à la suite du fichier s'il existe
   except
@@ -246,7 +246,7 @@ begin
   periodeChauffe := Trunc(Int(MateriauActif.pourcentage1));
   // Compteur d'impulsion de chauffe
 
-  AssignFile(Fichier, 'E:\MachineVirtuelle.txt');
+  AssignFile(Fichier, 'C:\MachineVirtuelle.txt');
   try
     Append(Fichier); // On écrit à la suite du fichier s'il existe
   except

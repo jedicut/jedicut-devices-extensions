@@ -90,7 +90,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=C:\Users\Julie\Documents\Jedicut Project\branches\Jedicut_2.3\Jedicut\Dll
+OutputDir=
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -101,7 +101,7 @@ DebugSourceDirs=
 UsePackages=0
 [Parameters]
 RunParams=
-HostApplication=C:\Users\Julie\Documents\Jedicut Project\branches\Jedicut_2.3\Jedicut\Jedicut.exe
+HostApplication=
 Launcher=
 UseLauncher=0
 DebugCWD=
@@ -125,28 +125,3 @@ FileDescription=
 FileVersion=1.0.0.0
 InternalName=
 LegalCopyright=
-LegalTrademarks=
-OriginalFilename=
-ProductName=
-ProductVersion=1.0.0.0
-Comments=
-[Excluded Packages]
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclBaseExpert70.bpl=JCL Package containing common units for JCL Experts
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclDebugExpert70.bpl=JCL Debug IDE extension
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclProjectAnalysisExpert70.bpl=JCL Project Analyzer
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclFavoriteFoldersExpert70.bpl=JCL Open and Save IDE dialogs with favorite folders
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclRepositoryExpert70.bpl=JCL Package containing repository wizards
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclUsesExpert70.bpl=JCL Uses Wizard
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclSIMDViewExpert70.bpl=JCL Debug Window of XMM registers
-C:\PROGRA~4\Borland\Delphi7\Projects\Bpl\JclStackTraceViewerExpert70.bpl=JCL Stack Trace Viewer
-[HistoryLists\hlUnitAliases]
-Count=1
-Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-[HistoryLists\hlOutputDirectorry]
-Count=6
-Item0=C:\Users\Julie\Documents\Jedicut Project\branches\Jedicut_2.3\Jedicut\Dll
-Item1=E:\DevPerso\Jedicut Project\Jedicut\Dll
-Item2=D:\Jedicut Extension SVN\trunk\FileTrace
-Item3=F:\DevPerso\Jedicut SVN\trunk\FileTrace
-Item4=F:\Jedicut Project\Jedicut\Dll
-Item5=F:\DevPerso\Jedicut Project\Jedicut\Dll
