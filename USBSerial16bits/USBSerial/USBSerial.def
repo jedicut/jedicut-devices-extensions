@@ -1,0 +1,12 @@
+LIBRARY   USBSerial
+
+EXPORTS
+
+GetDllFamily @1
+EmettreBit @2
+MoteurOnOff @3
+InitialiserChauffeEtCommunication @4
+EtatMachine @5
+LireChauffeMachine @6
+GetDescription @7
+AdapterOrdres @8

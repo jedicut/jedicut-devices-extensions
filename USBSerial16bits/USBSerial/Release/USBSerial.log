@@ -1,0 +1,17 @@
+﻿  stdafx.cpp
+  dllmain.cpp
+  serial.cpp
+serial.cpp(62): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1772): note: voir la déclaration de 'sprintf'
+serial.cpp(79): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1772): note: voir la déclaration de 'sprintf'
+  USBSerial.cpp
+USBSerial.cpp(226): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\string.h(343): note: voir la déclaration de 'strncpy'
+     Création de la bibliothèque C:\Users\gamin\Desktop\Jedicut prog\UsbSerial\trunk\USBSerial\USBSerial16bits\Release\USBSerial.lib et de l'objet C:\Users\gamin\Desktop\Jedicut prog\UsbSerial\trunk\USBSerial\USBSerial16bits\Release\USBSerial.exp
+  Génération de code en cours
+  19 of 21 functions (90.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Fin de la génération du code
+  USBSerial.vcxproj -> C:\Users\gamin\Desktop\Jedicut prog\UsbSerial\trunk\USBSerial\USBSerial16bits\Release\USBSerial.dll
