@@ -90,7 +90,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=D:\Jedicut Extension SVN\trunk\MDLCNC_XP
+OutputDir=C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\_Debug\Dll
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -134,9 +134,10 @@ Comments=
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlOutputDirectorry]
-Count=5
-Item0=D:\Jedicut Extension SVN\trunk\MDLCNC_XP
-Item1=F:\Jedicut Project\Source Dll\MDLCNC_XP
-Item2=F:\Jedicut Project\Source Dll\Frank
-Item3=F:\Jedicut Project\Jedicut\Dll
-Item4=F:\DevPerso\Jedicut Project\Jedicut\Dll
+Count=6
+Item0=C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\_Debug\Dll
+Item1=D:\Jedicut Extension SVN\trunk\MDLCNC_XP
+Item2=F:\Jedicut Project\Source Dll\MDLCNC_XP
+Item3=F:\Jedicut Project\Source Dll\Frank
+Item4=F:\Jedicut Project\Jedicut\Dll
+Item5=F:\DevPerso\Jedicut Project\Jedicut\Dll

@@ -90,7 +90,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=
+OutputDir=C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\_Debug\Dll
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -125,3 +125,9 @@ FileDescription=
 FileVersion=1.0.0.0
 InternalName=
 LegalCopyright=
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+[HistoryLists\hlOutputDirectorry]
+Count=1
+Item0=C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\_Debug\Dll

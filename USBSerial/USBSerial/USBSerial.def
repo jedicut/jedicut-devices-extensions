@@ -10,3 +10,11 @@ EtatMachine @5
 LireChauffeMachine @6
 GetDescription @7
 AdapterOrdres @8
+GetDllAcceptSmoothMove @9
+GetDllAcceptHeatingControl @10
+GetDllSendExternalTimer @11
+GetDllSendHeatingSignal @12
+GetDllSendHeatingStatus @13
+GetDllAcceptOnOffControl @14
+GetDllPicture @15
+

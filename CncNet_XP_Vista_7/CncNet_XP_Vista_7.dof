@@ -90,7 +90,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=D:\Jedicut Extension\branches\Jedicut_2.3\CncNet_XP_Vista_7
+OutputDir=C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\_Debug\Dll
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -134,13 +134,14 @@ Comments=
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlOutputDirectorry]
-Count=9
-Item0=D:\Jedicut Extension\branches\Jedicut_2.3\CncNet_XP_Vista_7
-Item1=Z:\Jedicut Project\branches\Jedicut_2.3\Jedicut\Dll
-Item2=D:\Jedicut Extension\branches\Jedicut_2.3\_Debug\Dll
-Item3=C:\Jedicut\Dll
-Item4=Z:\Jedicut Project\Jedicut\Dll
-Item5=D:\Jedicut Extension SVN\trunk\CncNet_XP
-Item6=F:\DevPerso\Jedicut SVN\trunk\CncNet_XP
-Item7=F:\Jedicut Project\Jedicut\Dll
-Item8=F:\DevPerso\Jedicut Project\Jedicut\Dll
+Count=10
+Item0=C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\_Debug\Dll
+Item1=D:\Jedicut Extension\branches\Jedicut_2.3\CncNet_XP_Vista_7
+Item2=Z:\Jedicut Project\branches\Jedicut_2.3\Jedicut\Dll
+Item3=D:\Jedicut Extension\branches\Jedicut_2.3\_Debug\Dll
+Item4=C:\Jedicut\Dll
+Item5=Z:\Jedicut Project\Jedicut\Dll
+Item6=D:\Jedicut Extension SVN\trunk\CncNet_XP
+Item7=F:\DevPerso\Jedicut SVN\trunk\CncNet_XP
+Item8=F:\Jedicut Project\Jedicut\Dll
+Item9=F:\DevPerso\Jedicut Project\Jedicut\Dll

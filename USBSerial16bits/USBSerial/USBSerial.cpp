@@ -1,19 +1,19 @@
 /*  Copyright 2012 Martin
 
-    This file is part of jedicutplugin.
+    This file is part of USBSerial16bits.
 
-    Foobar is free software: you can redistribute it and/or modify
+    USBSerial16bits is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    USBSerial16bits is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    along with USBSerial16bits.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "stdafx.h"
@@ -71,6 +71,78 @@ JEDICUTPLUGIN_API   unsigned char GetDllFamily()
 #endif
 	return(0);
 }
+
+/*********************************************************************************************/
+JEDICUTPLUGIN_API  short GetDllPicture()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllPicture:\n");
+#endif
+	return(2); // DLL_IMG_PARALLEL_PORT = 0 | DLL_IMG_GCODE = 1 | DLL_IMG_ARDUINO = 2
+
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API   short GetDllAcceptSmoothMove()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllAcceptSmoothMove:\n");
+#endif
+	return(0);
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true static with pin number  | 2=true dynamic with pin number  | 3=true static without pin number  | 4=true dynamic without pin number 
+JEDICUTPLUGIN_API   short GetDllAcceptHeatingControl()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllAcceptHeatingControl:\n");
+#endif
+	return(3);
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllSendExternalTimer()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllSendExternalTimer:\n");
+#endif
+	return(0);
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllSendHeatingSignal()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllSendHeatingSignal:\n");
+#endif
+	return(0);
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllSendHeatingStatus()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllSendHeatingStatus:\n");
+#endif
+	return(0);
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllAcceptOnOffControl()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllAcceptOnOffControl:\n");
+#endif
+	return(0);
+}
+
+
 
 /*********************************************************************************************/
 JEDICUTPLUGIN_API  short EmettreBit(double chauffe) // unsigned char bitRotation, unsigned char bitSens, int vitesse,double chauffe
@@ -223,7 +295,7 @@ int tailleCible;
       mov Cible,eax
       mov tailleCible,edx
 	}
-	strncpy(Cible,"Serial Plugin for use with USB2COM adapter or pure serial interface",tailleCible);
+	strncpy(Cible,"Serial Plugin for use with USB2COM adapter or pure serial interface. v2.0.2",tailleCible);
 }
 
 

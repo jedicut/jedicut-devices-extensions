@@ -26,6 +26,7 @@
   TMateriau* MateriauActif;
   unsigned short portAdresseBase; // Adresse de base du port parallèle
   int currentVitesse = 0;
+  int pastVitesse = 0;
   int currentChauffe = 0;
 
 #ifdef DEBUG_OUTPUT
@@ -35,8 +36,12 @@
 
 char rotSum  = 0;
 char sensSum = 0;
-/*********************************************************************************************/
+
 void sendMotorCmd(unsigned char rot, unsigned char sens)
+/*********************************************************************************************/
+// --- BLOC EXPERIMENTAL - nouvelle gestion vitesse & chauffe
+// Remplace ligne précédente
+// void sendMotorCmd(unsigned char rot, unsigned char sens, int vitesse)
 {
 char cmd[3];
 
@@ -44,24 +49,39 @@ char cmd[3];
 
    if(rot & rotSum)
    {
+	   // --- BLOC EXPERIMENTAL - nouvelle gestion vitesse & chauffe
+	   /*
+	   if (currentVitesse != pastVitesse)
+	   {
+		   // emit command to set vitesse (only valus between 0 and 255 allowed)
+		   cmd[0] = 'F';
+		   cmd[1] = currentVitesse & 0xff;
+		   writeCommand(cmd);
+		   pastVitesse = currentVitesse;
+	   }*/
+
 		cmd[0] = 'M';
 		cmd[1] = rotSum+sensSum;
 		writeCommand(cmd);
 
 		rotSum = rot;
 		sensSum = sens;
+
+		// --- BLOC EXPERIMENTAL - nouvelle gestion vitesse & chauffe
+		/*currentVitesse = vitesse;*/
    } 
    else
    {
 	   rotSum += rot;
 	   sensSum |= sens;
+	   
+	   // --- BLOC EXPERIMENTAL - nouvelle gestion vitesse & chauffe
+	   /* currentVitesse += vitesse; */
    }
 
 
 	return;
 }
-
-
 
 /*********************************************************************************************/
 JEDICUTPLUGIN_API   unsigned char GetDllFamily()
@@ -69,8 +89,79 @@ JEDICUTPLUGIN_API   unsigned char GetDllFamily()
 #ifdef DEBUG_OUTPUT
 	fprintf(fp,"GetDllFamily:\n");
 #endif
+	return(0); // DLL_FAMILY_COM = 0
+}
+
+/*********************************************************************************************/
+JEDICUTPLUGIN_API  short GetDllPicture()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllPicture:\n");
+#endif
+	return(2); // DLL_IMG_PARALLEL_PORT = 0 | DLL_IMG_GCODE = 1 | DLL_IMG_ARDUINO = 2
+
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API   short GetDllAcceptSmoothMove()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllAcceptSmoothMove:\n");
+#endif
+	return(0); 
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true static with pin number  | 2=true dynamic with pin number  | 3=true static without pin number  | 4=true dynamic without pin number 
+JEDICUTPLUGIN_API   short GetDllAcceptHeatingControl()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllAcceptHeatingControl:\n");
+#endif
+	return(3); 
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllSendExternalTimer()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllSendExternalTimer:\n");
+#endif
+	return(0); 
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllSendHeatingSignal()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllSendHeatingSignal:\n");
+#endif
 	return(0);
 }
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllSendHeatingStatus()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllSendHeatingStatus:\n");
+#endif
+	return(0);
+}
+
+/*********************************************************************************************/
+// 0=false | 1=true
+JEDICUTPLUGIN_API  short GetDllAcceptOnOffControl()
+{
+#ifdef DEBUG_OUTPUT
+	fprintf(fp, "GetDllAcceptOnOffControl:\n");
+#endif
+	return(0);
+}
+
 
 /*********************************************************************************************/
 JEDICUTPLUGIN_API  short EmettreBit(double chauffe) // unsigned char bitRotation, unsigned char bitSens, int vitesse,double chauffe
@@ -104,8 +195,13 @@ JEDICUTPLUGIN_API  short EmettreBit(double chauffe) // unsigned char bitRotation
 
 	// send motor command
 	sendMotorCmd(bitRotation,bitSens);
+	// --- BLOC EXPERIMENTAL - nouvelle gestion vitesse & chauffe
+	// Remplace ligne précédente
+	/* sendMotorCmd(bitRotation, bitSens, vitesse); */
 
 	// check if Vitesse changed
+	// --- BLOC EXPERIMENTAL - nouvelle gestion vitesse & chauffe
+	// Commenter tout le paragraphe suivant
 	if(vitesse != currentVitesse)
 	{
 		// emit command to set vitesse (only valus between 0 and 255 allowed)
@@ -140,12 +236,16 @@ JEDICUTPLUGIN_API  void MoteurOnOff() // parameter: bool moteurOn
 		// Initialise heat and delay values, so they are set new
 		// in case of a reset of the controller (added after comment from ZbigPL)
 		currentVitesse = 0;
+		pastVitesse = 0;
 		currentChauffe = 0;		
 	}
 	else         
 	{  
 		// is there an outstanding step?
 		sendMotorCmd(rotSum, sensSum);
+		// --- BLOC EXPERIMENTAL - nouvelle gestion vitesse & chauffe
+		// Remplace ligne précédente
+		//sendMotorCmd(rotSum, sensSum, 1); // 1, just to indicate a speed value for the last step
 		rotSum=sensSum=0;
 		// Heat off, all Motors off
 		writeCommand("H\000");     
@@ -222,7 +322,7 @@ int tailleCible;
       mov Cible,eax
       mov tailleCible,edx
 	}
-	strncpy(Cible,"Serial Plugin for use with USB2COM adapter or pure serial interface",tailleCible);
+	strncpy(Cible,"Serial Plugin for use with USB2COM adapter or pure serial interface v1.0.2",tailleCible);
 }
 
 

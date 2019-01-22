@@ -45,6 +45,16 @@ uses
   function LireChauffeMachine : double; export;
   procedure AdapterOrdres(var ArrayOrdres : TArrayOrdresMoteur); export;
 
+  // New functions to adapt Jedicut capacities (and simplify settings)
+  function GetDllAcceptSmoothMove() : smallInt; export;
+  function GetDllAcceptHeatingControl() : smallInt; export;
+  function GetDllSendExternalTimer() : smallInt; export;
+  function GetDllSendHeatingSignal() : smallInt; export;
+  function GetDllSendHeatingStatus() : smallInt; export;
+  function GetDllAcceptOnOffControl() : smallInt; export;
+  function GetDllPicture() : smallInt; export;
+
+
   // Fonctions privées
 //{$IF Defined(_DEBUG)}
 //    procedure PortOut(Port : Word; Data : Byte);
@@ -106,7 +116,7 @@ procedure GetDescription(Cible : PChar; tailleCible: integer);
 var
   Description : ShortString;
 begin
-  Description := 'Protocole utilisé avec la machine CncNet MM2001, compatible Windows XP. Chauffe & utilisation du timer externe. Version 1.5.0.1';
+  Description := 'Protocole utilisé avec la machine CncNet MM2001, compatible Windows XP. Chauffe & utilisation du timer externe. Version 1.6.2';
   StrPLCopy(Cible, Description, tailleCible);
 end;
 
@@ -125,12 +135,12 @@ begin
   if moteurOn then
   begin
     // Alimenter les moteurs
-    PortOut(portAdresseBase + 2, value); // 0 pour MM2001 - Inversion du signal pour test de la 4xTB6560AHQ
+    PortOut(portAdresseBase + 2, 0); // 0 pour MM2001 - value (Inversion du signal) pour test de la 4xTB6560AHQ
   end else begin
     // Emettre la remise à zero des bits moteurs
     PortOut(portAdresseBase, 0);
     // Couper l'alimentation des moteurs et mettre la chauffe à 0
-    PortOut(portAdresseBase + 2, 0); // 8 avant utilisation de la variable ou "value" pour MM2001
+    PortOut(portAdresseBase + 2, 8); // 8 avant utilisation de la variable ou "value" pour MM2001 ou 0 pour test de la 4xTB6560AHQ
   end;
 end;
 
@@ -421,125 +431,76 @@ end;
 {-----------------------------------------------------------------}
 { Compresser les ordres de rotation pour optimiser les vitesses }
 procedure CompresserOrdresMoteur(var ArrayOrdres : TArrayOrdresMoteur);
-type
-  TContrainte = record
-    byte, compteur : integer;
-  end;
-var
-  Contrainte : array[0..5] of TContrainte;
-  i, j, temp : integer;
-  bPointOK : boolean;
 begin
-  // Initialiser les variables temporaires
-  for j:=0 to 5 do
-  begin
-    Contrainte[j].byte := 0;
-    Contrainte[j].compteur := 0;
-  end;
 
-  // Traiter tous les points
-  for i:=0 to Length(ArrayOrdres.ArrayOrdres)-1 do
-  begin
-    bPointOK := false;
+end;
 
-    // Tester si le point est connu
-    for j:=0 to 5 do
-    begin
-      if (Contrainte[j].byte=ArrayOrdres.ArrayOrdres[i].bitRotation) then
-      begin
-        break;
-      end else begin
-        if(Contrainte[j].byte=0) then
-        begin
-          Contrainte[j].byte:=ArrayOrdres.ArrayOrdres[i].bitRotation;
-          break;
-        end;
-      end;
-    end;
+{-----------------------------------------------------------------}
+{ New functions to adapt Jedicut capacities (and simplify settings)
+{-----------------------------------------------------------------}
 
-    // Contrôle pour ne pas sortir de la boucle
-    if (i+1 <= Length(ArrayOrdres.ArrayOrdres)-1) then
-    begin
-      // Si le suivant est du même type que le point courant
-      if (ArrayOrdres.ArrayOrdres[i].bitRotation=ArrayOrdres.ArrayOrdres[i+1].bitRotation) then
-      begin
-        // Mettre à jour les contraintes
-        for j:=0 to 5 do
-        begin
-          if (Contrainte[j].byte=0) then
-          begin
-            break;
-          end;
-          if (Contrainte[j].byte = ArrayOrdres.ArrayOrdres[i].bitRotation) then
-          begin
-            Contrainte[j].compteur := 0;
-          end else begin
-            Contrainte[j].compteur := Contrainte[j].compteur - ArrayOrdres.ArrayOrdres[i].vitesse - 1;
-            if (Contrainte[j].compteur<0) then Contrainte[j].compteur := 0;
-          end;
-        end;
-        bPointOK := true;
-      end;
-    end;
+{-----------------------------------------------------------------}
+{ Enable smooth movement - dependence on EmettreBit function }
+{ 0=false | 1=true }
+function GetDllAcceptSmoothMove() : smallInt;
+begin
+  Result := 1;
+end;
 
-    // Adapter la vitesse du point courant
-    if (not bPointOK) then
-    begin
-      // On historise la vitesse du point courant
-      temp := ArrayOrdres.ArrayOrdres[i].vitesse;
-      // On affecte au point courant la contrainte du point suivant quand c'est possible
-      // sinon on ne fait rien
-      if (i+1 <= Length(ArrayOrdres.ArrayOrdres)-1) then
-      begin
-        for j:=0 to 5 do
-        begin
-          // On recherche la contrainte du point suivant
-          if (Contrainte[j].byte=ArrayOrdres.ArrayOrdres[i+1].bitRotation) then
-          begin
-            // Modifier la vitesse
-            if (Contrainte[j].compteur - 1 < 0) then
-            begin
-              ArrayOrdres.ArrayOrdres[i].vitesse := 0;
-            end else begin
-              ArrayOrdres.ArrayOrdres[i].vitesse := Contrainte[j].compteur - 1;
-            end;
-            // On sort de la boucle
-            break;
-          end;
-          // Si on arrive là, la contrainte n'était pas initialisée, donc elle est nulle
-          // donc la vitesse est nulle
-          if (j=5) then
-          begin
-            ArrayOrdres.ArrayOrdres[i].vitesse := 0;
-          end;
-        end;
-      end;
+{-----------------------------------------------------------------}
+{ What kind of heating control propose the cnc controller ? }
+{ 0=false
+  1=true static with pin number
+  2=true dynamic with pin number
+  3=true static without pin number
+  4=true dynamic without pin number
+}
+function GetDllAcceptHeatingControl() : smallInt;
+begin
+  Result := 2;
+end;
 
-      // Mettre à jour les contraintes
-      for j:=0 to 5 do
-      begin
-        // Si byte=0 alors les points suivants le son également, donc on sort
-        if (Contrainte[j].byte=0) then
-        begin
-          break;
-        end;
-        // Traitement particulier pour le point courant
-        if (Contrainte[j].byte=ArrayOrdres.ArrayOrdres[i].bitRotation) then
-        begin
-          if (temp-ArrayOrdres.ArrayOrdres[i].vitesse<0) then
-          begin
-            Contrainte[j].compteur := 0;
-          end else begin
-            Contrainte[j].compteur:=temp-ArrayOrdres.ArrayOrdres[i].vitesse;
-          end;
-        end else begin
-          // Pour tous les autres points
-          Contrainte[j].compteur := Contrainte[j].compteur - ArrayOrdres.ArrayOrdres[i].vitesse;
-          if (Contrainte[j].compteur<0) then Contrainte[j].compteur := 0;
-        end;
-      end;
-    end;
-  end;
+{-----------------------------------------------------------------}
+{ Can cnc controller have an external timer in output ? }
+{ 0=false | 1=true }
+function GetDllSendExternalTimer() : smallInt;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ Does cnc controller have a heating signal in output ? }
+{ 0=false | 1=true }
+function GetDllSendHeatingSignal() : smallInt;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ Does cnc controller have a heating status signal in output ? }
+{ 0=false | 1=true }
+function GetDllSendHeatingStatus() : smallInt;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ Does cnc controller need on/off motor signal pin number ? }
+{ 0=false | 1=true }
+function GetDllAcceptOnOffControl() : smallInt;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ The kind of plugin of communication }
+{ DLL_IMG_PARALLEL_PORT = 0
+  DLL_IMG_GCODE = 1
+  DLL_IMG_ARDUINO = 2
+}
+function GetDllPicture() : smallInt;
+begin
+  Result := 0;
 end;
 
 end.

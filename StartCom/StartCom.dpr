@@ -38,7 +38,15 @@ exports
   InitialiserChauffeEtCommunication,
   EtatMachine,
   LireChauffeMachine,
-  AdapterOrdres;
+  AdapterOrdres,
+  GetDllAcceptSmoothMove,
+  GetDllAcceptHeatingControl,
+  GetDllSendExternalTimer,
+  GetDllSendHeatingSignal,
+  GetDllSendHeatingStatus,
+  GetDllAcceptOnOffControl,
+  GetDllPicture;
+  
 begin
 end.
 

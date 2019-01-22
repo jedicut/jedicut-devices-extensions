@@ -90,9 +90,14 @@ const DLL_FAMILY_FILE_CUT_READ_ONLY = 5;
 const DLL_FAMILY_FILE_CUT_WRITE_ONLY = 6;
 
 { Définition des constantes spécifiques aux dll de communication}
+const DLL_CAPABILITY_SMOOTH_TRUE = 1;
+const DLL_CAPABILITY_SMOOTH_FALSE = 0;
+
 const NO_ERROR = 0;
 const ERROR_TIME_OUT = -1;
 const ERROR_ON_SENDING = -2;
+const ERROR_EMERGENCY = -3;
+const ERROR_LIMIT_SWITCH = -4;
 
 {--- Définition des constantes spécifiques aux dll de fichier ---}
 

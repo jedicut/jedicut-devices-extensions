@@ -32,7 +32,7 @@ uses
   // 2 : Dll de lecture/ecriture de fichier
   function GetDllFamily : byte; export
 
-  procedure GetDescription(Cible : PChar; tailleCible: integer);
+  procedure GetDescription(Cible : PAnsiChar; tailleCible: integer);
   function EmettreBit(bitRotation, bitSens : byte ; vitesse : integer ; chauffe : double) : smallInt ; export;
   procedure MoteurOnOff(moteurOn : boolean); export;
   procedure InitialiserChauffeEtCommunication(portBase : word ;
@@ -69,11 +69,11 @@ end;
 
 {-----------------------------------------------------------------}
 { Renvoie la description de la dll }
-procedure GetDescription(Cible : PChar; tailleCible: integer);
+procedure GetDescription(Cible : PAnsiChar; tailleCible: integer);
 var
   Description : ShortString;
 begin
-  Description := 'Trace datée des bits envoyés dans le fichier C:\MachineVirtuelle.txt. Version 0.7.2';
+  Description := 'Trace datée des bits envoyés dans le fichier D:\MachineVirtuelle.txt. Version 0.8.0';
   StrPLCopy(Cible, Description, tailleCible);
 end;
 
@@ -101,7 +101,7 @@ var
   stepOk : boolean;
 begin
   Date := Now;
-  AssignFile(Fichier, 'C:\MachineVirtuelle.txt');
+  AssignFile(Fichier, 'D:\MachineVirtuelle.txt');
   try
     Append(Fichier); // On écrit à la suite du fichier s'il existe
   except
@@ -246,7 +246,7 @@ begin
   periodeChauffe := Trunc(Int(MateriauActif.pourcentage1));
   // Compteur d'impulsion de chauffe
 
-  AssignFile(Fichier, 'C:\MachineVirtuelle.txt');
+  AssignFile(Fichier, 'D:\MachineVirtuelle.txt');
   try
     Append(Fichier); // On écrit à la suite du fichier s'il existe
   except

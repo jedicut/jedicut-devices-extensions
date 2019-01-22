@@ -48,6 +48,15 @@ uses
 
   procedure AdapterOrdres(var ArrayOrdres : TArrayOrdresMoteur); export;
 
+  // New functions to adapt Jedicut capacities (and simplify settings)
+  function GetDllAcceptSmoothMove() : smallInt; export;
+  function GetDllAcceptHeatingControl() : smallInt; export;
+  function GetDllSendExternalTimer() : smallInt; export;
+  function GetDllSendHeatingSignal() : smallInt; export;
+  function GetDllSendHeatingStatus() : smallInt; export;
+  function GetDllAcceptOnOffControl() : smallInt; export;
+  function GetDllPicture() : smallInt; export;
+
   // Vu que dans dll USB
   //procedure LibererRessources; export;
   //function GetChauffeMachine : double; export;
@@ -94,7 +103,7 @@ procedure GetDescription(Cible : PChar; tailleCible: integer);
 var
   Description : ShortString;
 begin
-  Description := 'Petite description du Plugin / A small description of the plugin. Version 0.0';
+  Description := 'Petite description du Plugin / A small description of the plugin. Version 0.1';
   StrPLCopy(Cible, Description, tailleCible);
 end;
 
@@ -157,5 +166,76 @@ begin
 
   Result := retour;
 end;
+
+
+{-----------------------------------------------------------------}
+{ New functions to adapt Jedicut capacities (and simplify settings)
+{-----------------------------------------------------------------}
+
+{-----------------------------------------------------------------}
+{ Enable smooth movement - dependence on EmettreBit function }
+{ 0=false | 1=true }
+function GetDllAcceptSmoothMove() : smallInt; export;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ What kind of heating control propose the cnc controller ? }
+{ 0=false
+  1=true static with pin number
+  2=true dynamic with pin number
+  3=true static without pin number
+  4=true dynamic without pin number
+}
+function GetDllAcceptHeatingControl() : smallInt; export;
+begin
+  Result := 2;
+end;
+
+{-----------------------------------------------------------------}
+{ Can cnc controller have an external timer in output ? }
+{ 0=false | 1=true }
+function GetDllSendExternalTimer() : smallInt; export;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ Does cnc controller have a heating signal in output ? }
+{ 0=false | 1=true }
+function GetDllSendHeatingSignal() : smallInt; export;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ Does cnc controller have a heating status signal in output ? }
+{ 0=false | 1=true }
+function GetDllSendHeatingStatus() : smallInt; export;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ Does cnc controller need on/off motor signal pin number ? }
+{ 0=false | 1=true }
+function GetDllAcceptOnOffControl() : smallInt; export;
+begin
+  Result := 1;
+end;
+
+{-----------------------------------------------------------------}
+{ The kind of plugin of communication }
+{ DLL_IMG_PARALLEL_PORT = 0
+  DLL_IMG_GCODE = 1
+  DLL_IMG_ARDUINO = 2
+}
+function GetDllPicture() : smallInt; export;
+begin
+  Result := 0;
+end;
+
+
 
 end.

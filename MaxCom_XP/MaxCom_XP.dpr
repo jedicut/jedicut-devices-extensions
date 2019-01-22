@@ -35,7 +35,15 @@ exports
   EmettreBit,
   MoteurOnOff,
   InitialiserChauffeEtCommunication,
-  EtatMachine;
+  EtatMachine,
+  GetDllAcceptSmoothMove,
+  GetDllAcceptHeatingControl,
+  GetDllSendExternalTimer,
+  GetDllSendHeatingSignal,
+  GetDllSendHeatingStatus,
+  GetDllAcceptOnOffControl,
+  GetDllPicture;
+
 begin
 end.
 

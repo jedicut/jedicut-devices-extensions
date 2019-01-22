@@ -77,6 +77,7 @@ typedef struct {
 
 //extern "C" {
 JEDICUTPLUGIN_API  unsigned char  GetDllFamily();  
+
 JEDICUTPLUGIN_API  short EmettreBit(double chauffe);  // unsigned char bitRotation, unsigned char bitSens, int vitesse, double chauffe
 JEDICUTPLUGIN_API  void MoteurOnOff(); // parameter: bool moteurOn
 JEDICUTPLUGIN_API  void InitialiserChauffeEtCommunication(TMateriau* Materiau); // unsigned short portBase, TParametreChauffe ParamChauffe,
@@ -85,4 +86,15 @@ JEDICUTPLUGIN_API  unsigned char EtatMachine();
 JEDICUTPLUGIN_API  double LireChauffeMachine();
 JEDICUTPLUGIN_API  void GetDescription(); // Parameter: char* Cible , int tailleCible
 JEDICUTPLUGIN_API  void AdapterOrdres();  // parameters: TArrayOrdresMoteur ArrayOrdres
+
+JEDICUTPLUGIN_API  short GetDllAcceptSmoothMove();
+JEDICUTPLUGIN_API  short GetDllAcceptHeatingControl();
+JEDICUTPLUGIN_API  short GetDllSendExternalTimer();
+JEDICUTPLUGIN_API  short GetDllSendHeatingSignal();
+JEDICUTPLUGIN_API  short GetDllSendHeatingStatus();
+JEDICUTPLUGIN_API  short GetDllAcceptOnOffControl();
+JEDICUTPLUGIN_API  short GetDllPicture();
+
+// $(SolutionDir)$(Configuration)\
+
 //}
