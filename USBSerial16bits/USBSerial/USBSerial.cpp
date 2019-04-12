@@ -180,12 +180,21 @@ JEDICUTPLUGIN_API  short EmettreBit(double chauffe) // unsigned char bitRotation
 	// check if Vitesse changed
 	if(vitesse != currentVitesse)
 	{
-		// emit command to set vitesse (only valus between 0 and 255 allowed)
-		cmd[0] = 'F';
-		cmd[1] = (vitesse>>8) & 0xFF;
-		cmd[2] = vitesse & 0xFF;
-		writeCommand(cmd);
-		currentVitesse = vitesse;
+		if (vitesse < 0) {
+			int vitesse2 = -1 * (int)vitesse;
+			cmd[0] = 'P';
+			cmd[1] = (vitesse2 >> 8) & 0xFF;
+			cmd[2] = vitesse2 & 0xFF;
+			writeCommand(cmd);
+		}
+		else {
+			// emit command to set vitesse (only valus between 0 and 255 allowed)
+			cmd[0] = 'F';
+			cmd[1] = (vitesse >> 8) & 0xFF;
+			cmd[2] = vitesse & 0xFF;
+			writeCommand(cmd);
+			currentVitesse = vitesse;
+		}
 	}
 
 
@@ -295,7 +304,7 @@ int tailleCible;
       mov Cible,eax
       mov tailleCible,edx
 	}
-	strncpy(Cible,"Serial Plugin for use with USB2COM adapter or pure serial interface. v2.0.2",tailleCible);
+	strncpy(Cible,"Serial Plugin for use with USB2COM adapter or pure serial interface. v2.0.3",tailleCible);
 }
 
 

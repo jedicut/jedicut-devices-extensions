@@ -31,6 +31,7 @@ void EndStopManage (void);
 void Trait_Arr_fdc(void);
 void testPosIntDem(void);
 
+inline void PauseManage (unsigned int pms)
 inline void StepperDriverDir (byte dir) ;
 inline void StepperDriverStep (byte step) ;
 inline void ProcessStep(byte cmd) ;

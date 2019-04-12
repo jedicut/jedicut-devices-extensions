@@ -22,7 +22,8 @@
 
 
 void setup (void) ;
-void BufferFlush (void) ;
+void BufferFlush (void) 
+inline void PauseManage (unsigned int pms)
 void StepperDriverDir (byte dir);
 void StepperDriverStep (byte step);
 void StepperDriverEnable (bool en);

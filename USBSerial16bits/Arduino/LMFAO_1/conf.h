@@ -8,7 +8,7 @@
 
 #define MACHINE_NAME "  CNC FIL AERODEN"
 
-#define VERSION "v1.4.0"
+#define VERSION "v1.5.0"
 
 // Choix de la langue : la langue choisie ne doit pas être en commentaire
 
@@ -22,7 +22,7 @@
 
 
 // Limite de puissance Chauffe du fil en %
-#define MAX_PERCENTAGE_WIRE 80
+#define MAX_PERCENTAGE_WIRE 100
 
 /*=============================================================================
 Paramètre permettant de définir si les moteurs restent alimentés à l'arrêt,

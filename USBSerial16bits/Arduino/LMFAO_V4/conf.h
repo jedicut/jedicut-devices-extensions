@@ -2,61 +2,35 @@
 #ifndef _CONF_H
 #define _CONF_H
 
-
-//==============================================================================
-// Definition du nom de votre machine
+//#define DEBUG
 
 #define MACHINE_NAME "  CNC FIL AERODEN"
 
-//------------------------------------------------------------------------------
+#define VERSION "v4.6.0"
 
-//==============================================================================
-// Définition de votre version
-
-#define VERSION "v4.5.0"
-
-//------------------------------------------------------------------------------
-
-//==============================================================================
 // Choix de la langue : la langue choisie ne doit pas être en commentaire
-
 #define LANG_FRENCH
 //#define LANG_ENGLISH
 
-//------------------------------------------------------------------------------
-
-//==============================================================================
 // millimeter per Step
 // Example 1: Stepper Driver setting: Full Step, Stepper Motor: 400 steps per revolution, M6 Lead screw: 1mm thread => (mm per revolution * driver setting) / step per revolution = (1*1)/400 = 0.0025
 // Ecxample 2: Stepper Driver Setting: 1/8 Step, Stepper Motor: 200 steps per revolution, Belt: 2mm between teeth, Pulley: 20 teeth => (Pulley teeth * Belt teeth interspace * driver setting) / step per revolution = (20*2*1/8)/200 = 0.025
-
 #define MM_PER_STEP 0.0025
 
-//------------------------------------------------------------------------------
-
-//==============================================================================
 // Limite de puissance Cutter: cutter 6V alimenté en 12v PWM à 50%
 #define MAX_PERCENTAGE_CUTTER 75
 
-// Limite de puissance Chauffe du fil en %  de 10 à 100 maxi
-#define MAX_PERCENTAGE_WIRE 80
-//------------------------------------------------------------------------------
+// Limite de puissance Chauffe du fil en %
+#define MAX_PERCENTAGE_WIRE 100
 
-//==============================================================================
 // Choix entre Potentiomètre  et encodeur pour le chauffe du fil en manuel
-// l'option choisie ne doit pas être en commentaire
-
+// Mettre POT_CHAUF "1" pour le potentiomètre, Mettre POT_CHAUF 0 pour l'encodeur
 //#define HEAT_CONSIGN_ROTARY_ENCODER
 #define HEAT_CONSIGN_POTENTIOMETER
 
-//------------------------------------------------------------------------------
-
-//==============================================================================
-// Buzzer on ou off pour alarme sonore fin de course,
-// pour ne pas avoir d'alarme sonore, mettre "// " en début de ligne
+// Mettre ON_BUZZER "1" pour Alarme sonore fin de course,"0" pas d'alarme sonore
 #define BUZZER_ON
 
-//------------------------------------------------------------------------------
 
 /*=============================================================================
 Paramètre permettant de définir si les moteurs restent alimentés à l'arrêt,
@@ -67,8 +41,7 @@ tension. Il est possible de mettre les moteurs hors tension par l'interrupteur
 asservie aux ordres du sketch Arduino et Jedicut. A "0" les moteurs sont
 toujours sous tension.
 */
-#define MOTEUR_ON_ASSERVI 1 // "0" Les moteurs sont toujours sous tension
-//------------------------------------------------------------------------------
+#define MOTEUR_ON_ASSERVI 0 // "0" Les moteurs sont toujours sous tension
 
 /*=============================================================================
 Impératif : Ecran de "configuration machine" dans Jedicut : toutes les cases
@@ -80,8 +53,6 @@ Impératif : Ecran de "configuration machine" dans Jedicut : toutes les cases
 */ 
 #define INV_DIR_MASK 0b00000000 // "1" inversion des 4 axes -> 0b11110000
 
-//------------------------------------------------------------------------------
-
 /*==============================================================================
 Suivant les fins de courses utilisés il est nécessaire parfois de les inverser.
 Le sens normal: le fin de course non sollicité on a "0" sur l'entrée de la ramps
@@ -92,12 +63,13 @@ Le sens inverse : le fin de course non sollicité on a "1" sur l'entrée de la r
 #define INV_FDC_X2 0 // "0" Non inversion, "1" Inversion
 #define INV_FDC_Y2 0 // "0" Non inversion, "1" Inversion
 
-//------------------------------------------------------------------------------
-
 /*=============================================================================
 Paramètres pour permettre le calcul des données nécessaires à la mise à zéro
 de la machine
-*/ 
+Pas par step : 400steps par tour, vis M6 au pas de 1mm --> 1/400 = 0.0025
+Mettre la même valeur que pour Jedicut.
+*/
+//#define PAS_STEP 0.0025 
 #define VIT_RECH_FDC 4.50 // Vitesse de recherche fdc en mm/s Format XX.XX
 #define VIT_AJUST_FDC 1.00  // Vitesse d'ajustement fdc en mm/s Format XX.XX
 
@@ -107,7 +79,7 @@ Ces paramètres déterminent les différents types de séquence Homing
 #define SEQ_HOMING 0 // "1" sequence Homing active, "0"  Pas de sequence Homing
 #define POS_SECU_Y 1  // "1" exécute une remonté des Y avant le homing
 #define MM_POS_SECU_Y 2 // valeur de remonté des Y de x mm avant le homing
-#define PREPOS 0 // "1" Pré-positionnemnt après homing permis, "0" pas de 
+#define PREPOS 1 // "1" Pré-positionnemnt après homing permis, "0" pas de 
                  // pré-positionnement
 #define MM_PREPOS_Y 1 // Valeur en mm de la distance du pré-positionnement Y
 #define MM_PREPOS_X 1 // Valeur en mm de la distance du pré-positionnement X
@@ -118,13 +90,8 @@ Ces paramètres déterminent les différents types de séquence Homing
 // JediCut comport.ini file must have the exact same value
 #define BAUDRATE 115200
 
-//------------------------------------------------------------------------------
-
 //==============================================================================
 // If the Stepper Driver has an inverted enable pin level, uncomment this 
-// si le driver est débloqué par un "1" au lieu d'un "0" enlevez les // de la 
-// ligne suivante.
-
 //#define INVERT_STEPPER_DRIVER_ENABLE_PIN
 
 #ifdef INVERT_STEPPER_DRIVER_ENABLE_PIN
@@ -134,8 +101,6 @@ Ces paramètres déterminent les différents types de séquence Homing
 	#define	STEPPER_DRIVER_ENABLE_HIGH_LEVEL 0
 	#define	STEPPER_DRIVER_ENABLE_LOW_LEVEL 1
 #endif
-
-//------------------------------------------------------------------------------
 
 /*==============================================================================
 Attention : Si vous utilisez cette option, il ne faut pas utiliser la chauffe 
@@ -149,12 +114,10 @@ trajectoire est la plus grande lorsque le fil parcourt un segment à 45°.
  notez la valeur en % pour 2 mm/s --> 30% puis la valeur pour la vitesse de 
  2.828 --> 39.5% maintenant vous faites 39.5 / 30 =  1.3166, ce coefficient de 
  correction sera donc de 1.32. Le sketch se débrouille pour les calculs de
- vitesse intermédiaire du fil.
+ vitesse intermédaire du fil.
 */                         
 # define CHAUFFE_ASSERV 0 // "0" pas de chauffe asservie, "1" chauffe asservie
-# define CORRECT_CHAUFFE 1.32 // coefficient de chauffe en fonction vitesse
-
-//------------------------------------------------------------------------------
+# define CORRECT_CHAUFFE 1.326 // coefficient de chauffe en fonction vitesse
 
 //==============================================================================
 

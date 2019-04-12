@@ -1,15 +1,10 @@
-﻿  stdafx.cpp
-  dllmain.cpp
-  serial.cpp
-c:\users\jedicut\documents\jedicut\extensions\jedicut-devices-extensions\usbserial16bits\usbserial\serial.cpp(62): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
-c:\users\jedicut\documents\jedicut\extensions\jedicut-devices-extensions\usbserial16bits\usbserial\serial.cpp(79): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
-  USBSerial.cpp
-c:\users\jedicut\documents\jedicut\extensions\jedicut-devices-extensions\usbserial16bits\usbserial\usbserial.cpp(298): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  USBSerial.cpp
+c:\users\jedicut\documents\jedicut\extensions\jedicut-devices-extensions\usbserial16bits\usbserial\usbserial.cpp(307): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(338): note: see declaration of 'strncpy'
      Creating library C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\USBSerial16bits\USBSerial\Release\USBSerial.lib and object C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\USBSerial16bits\USBSerial\Release\USBSerial.exp
   Generating code
-  All 27 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 27 functions ( 3.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   USBSerial.vcxproj -> C:\Users\Jedicut\Documents\Jedicut\Extensions\jedicut-devices-extensions\USBSerial16bits\USBSerial\Release\USBSerial.dll
