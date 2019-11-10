@@ -71,4 +71,30 @@
   #define TEXT20 "  Homing Finished   "
 #endif
 
+
+// Dirk: Der Textfindung erster Versuch, im Oktober 2019. 
+#ifdef LANG_DEUTSCH                       // max. 20 Zeichen verwenden!
+  #define TEXT1  "Drahtlimit = "          // Alternative für Draht?? -> Bogen? auch doof
+  #define TEXT2  "Cutterlimit = "
+  #define TEXT3  "Draht->Potentiometer"
+  #define TEXT4  "Draht->Encoder      "
+  #define TEXT5  "Buzzertest          "
+  #define TEXT6  "Schaltertest        "
+  #define TEXT7  "Mode auf Hand !     "
+  #define TEXT8  "Motorschalter OFF ! "
+  #define TEXT9  "Drahtschalter OFF ! "
+  #define TEXT10 "Cutterschalter OFF !" 
+  #define TEXT11 "Endschalter Status: "
+  #define TEXT12 "Taster Grundstellung"
+  #define TEXT13 "Grundstellungsfahrt "
+  #define TEXT14 "MODE   MOT Drah  CUT"   // aus Platzgründen unverändert (zu überprüfen Alain)
+  #define TEXT15 "Hand"
+  #define TEXT16 " PC "
+  #define TEXT17 "Endschaltertest:    "   // Poti für Schneiddraht aufdrehen (A5 -> 5V), vor dem Einschalten, öffnet die Testseite.
+  #define TEXT18 "Beenden-> Draht <10%"   // Endschaltertest beenden (A5 -> GND)
+  #define TEXT19 "  Grundstellen ...  "
+  #define TEXT20 "  Grundstellung !   "
+#endif
+
+
 #endif                 

@@ -6,11 +6,12 @@
 
 #define MACHINE_NAME "  CNC FIL AERODEN"
 
-#define VERSION "v4.6.0"
+#define VERSION "v4.7.0"
 
 // Choix de la langue : la langue choisie ne doit pas être en commentaire
 #define LANG_FRENCH
 //#define LANG_ENGLISH
+//#define LANG_DEUTSCH                            // Dirk: deutsche Texte eingefügt
 
 // millimeter per Step
 // Example 1: Stepper Driver setting: Full Step, Stepper Motor: 400 steps per revolution, M6 Lead screw: 1mm thread => (mm per revolution * driver setting) / step per revolution = (1*1)/400 = 0.0025
@@ -24,9 +25,13 @@
 #define MAX_PERCENTAGE_WIRE 100
 
 // Choix entre Potentiomètre  et encodeur pour le chauffe du fil en manuel
-// Mettre POT_CHAUF "1" pour le potentiomètre, Mettre POT_CHAUF 0 pour l'encodeur
+// Decommenter la ligne de choix
 //#define HEAT_CONSIGN_ROTARY_ENCODER
 #define HEAT_CONSIGN_POTENTIOMETER
+//Valeur d'initialisation de l'encodeur en %
+#define VALEUR_INIT_ENCODEUR 25
+//Decommenter la ligne suivante pour inverser le sens de l'encodeur
+//#define ROT_ENC_INVERS
 
 // Mettre ON_BUZZER "1" pour Alarme sonore fin de course,"0" pas d'alarme sonore
 #define BUZZER_ON
