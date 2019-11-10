@@ -87,7 +87,7 @@
   #define TEXT11 "Endschalter Status: "
   #define TEXT12 "Taster Grundstellung"
   #define TEXT13 "Grundstellungsfahrt "
-  #define TEXT14 "MODE   MOT Drah  CUT"   // aus Platzgründen unverändert (zu überprüfen Alain)
+  #define TEXT14 "Mode  Mot. Draht Cut"   
   #define TEXT15 "Hand"
   #define TEXT16 " PC "
   #define TEXT17 "Endschaltertest:    "   // Poti für Schneiddraht aufdrehen (A5 -> 5V), vor dem Einschalten, öffnet die Testseite.
